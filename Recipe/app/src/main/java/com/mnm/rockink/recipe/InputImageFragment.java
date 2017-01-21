@@ -3,11 +3,14 @@ package com.mnm.rockink.recipe;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +18,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
-public class InputImageFragment extends Fragment {
+import static android.app.Activity.RESULT_OK;
 
-    private static final int SELECT_PICTURE = 1;
+public class InputImageFragment extends Fragment {
 
     private ImageView imageView;
     private Button this_image;
     private Button other_image;
     private InputImageFragmentInteraction myListener;
+    private Bitmap bitmap;
 
     public interface InputImageFragmentInteraction{
-        void imageChoosen();
+        void imageChoosen(Bitmap b);
     }
 
 
@@ -52,7 +57,7 @@ public class InputImageFragment extends Fragment {
         this_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myListener.imageChoosen();
+                myListener.imageChoosen(bitmap);
             }
         });
 
@@ -73,9 +78,14 @@ public class InputImageFragment extends Fragment {
                                 new Intent[] { takePhotoIntent }
                         );
 
-                startActivityForResult(chooserIntent, SELECT_PICTURE);
+                startActivityForResult(chooserIntent, 1);
             }
         });
+
+        if(savedInstanceState != null){
+            bitmap = savedInstanceState.getParcelable("bitmap");
+            imageView.setImageBitmap(bitmap);
+        }
 
         return v;
     }
@@ -83,18 +93,33 @@ public class InputImageFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == SELECT_PICTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
             if (data == null) {
                 return;
             }
-            try {
-                InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                imageView.setImageBitmap(bitmap);
 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            final Bundle extras = data.getExtras();
+            if (extras != null) {
+                //Get image
+                bitmap = extras.getParcelable("data");
+                imageView.setImageBitmap(bitmap);
+            }
+            else{
+                InputStream inputStream = null;
+                try {
+                    inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                    bitmap = BitmapFactory.decodeStream(inputStream);
+                    imageView.setImageBitmap(bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("bitmap",bitmap);
     }
 }

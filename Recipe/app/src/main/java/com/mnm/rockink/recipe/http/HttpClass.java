@@ -50,7 +50,7 @@ public class HttpClass {
 
     }
 
-
+    /*
     public void get(Bitmap bitmap) throws IOException {
         String url = "https://samples.clarifai.com/food.jpg";
         url = String.format(Constants.URL+"getrecipe?url=%s", url);
@@ -85,6 +85,7 @@ public class HttpClass {
         return food;
 
     }
+    */
 
 
     public OkHttpClient getClient() {
