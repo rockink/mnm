@@ -34,9 +34,10 @@ public class MainActivity extends AppCompatActivity implements AppDescriptionFra
             urlFormFragment = new URLForm();
             recipeList = new RecipeList();
 
-            transaction.add(R.id.main_layout, appDescriptionFragment, "description");
-            transaction.add(R.id.main_layout, urlFormFragment, "form");
-            transaction.commit();
+            //transaction.add(R.id.main_layout, appDescriptionFragment, "description");
+            //transaction.add(R.id.main_layout, urlFormFragment, "form");
+            //transaction.commit();
+            transaction.replace(R.id.main_layout,appDescriptionFragment);
         }
 
     }
@@ -53,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements AppDescriptionFra
 //        recipeList = new RecipeList();
         recipeList.setFoodData(s);
 
-        transaction.remove(appDescriptionFragment);
-        transaction.remove(urlFormFragment);
-        transaction.add(R.id.main_layout, recipeList, "recipeList");
-        transaction.commit();
+        //transaction.remove(appDescriptionFragment);
+        //transaction.remove(urlFormFragment);
+        //transaction.add(R.id.main_layout, recipeList, "recipeList");
+        //transaction.commit();
 
     }
 
