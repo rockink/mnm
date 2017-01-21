@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            app:srcCompat="@color/cardview_dark_background"
+            android:id="@+id/imageView"
+            android:layout_weight="8"
+            android:contentDescription=""
+            android:layout_height="match_parent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:orientation="vertical"
+            android:layout_weight="7"
+            android:layout_height="match_parent" >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="this is our title"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="12sp"
+                android:id="@+id/title" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Nurtritional Fact"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/nutritional" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="See Recipe"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:id="@+id/recipe" />
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.LinearLayoutCompat>

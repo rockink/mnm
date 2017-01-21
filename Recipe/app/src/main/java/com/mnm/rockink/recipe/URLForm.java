@@ -1,6 +1,7 @@
 package com.mnm.rockink.recipe;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.mnm.rockink.recipe.http.HttpClass;
+import com.mnm.rockink.recipe.jsonData.Food;
 
 import java.io.IOException;
 
@@ -35,7 +37,7 @@ public class URLForm extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_urlform, container, false);
@@ -44,8 +46,10 @@ public class URLForm extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String urlString = url.getText().toString();
-                new GetItFromServer().execute(urlString);
+
+                Intent intent = new Intent(getContext(), RecipeListActivity.class);
+                intent.putExtra("url", url.getText().toString());
+                getActivity().startActivity(intent);
 
             }
         });
@@ -90,29 +94,33 @@ public class URLForm extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+
+        void setFoodList(Food s);
     }
 
 
 
-    public class GetItFromServer extends AsyncTask<String, Object, String> {
-
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                return httpClient.get(params[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-
-        }
-
-
-        @Override
-        protected void onPostExecute(String s) {
-            Log.d(getClass().getCanonicalName() + " RECIPESS ", s);
-        }
-    }
+//    public class GetItFromServer extends AsyncTask<String, Object, Food> {
+//
+//
+//        @Override
+//        protected Food doInBackground(String... params) {
+//            try {
+//                return httpClient.get(params[0]);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return null;
+//
+//        }
+//
+//
+//        @Override
+//        protected void onPostExecute(Food s) {
+//
+//            Log.d(getClass().getCanonicalName() + " RECIPESS ", String.valueOf(s.getCount()));
+//            mListener.setFoodList(s);
+//        }
+//    }
 }
