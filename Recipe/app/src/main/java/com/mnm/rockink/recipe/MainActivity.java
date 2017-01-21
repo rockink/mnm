@@ -1,5 +1,6 @@
 package com.mnm.rockink.recipe;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,10 +24,12 @@ public class MainActivity extends AppCompatActivity implements InputImageFragmen
             listFragment = (ListFragment) fragmentManager.findFragmentByTag("listFragment");
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             if(inputImageFragment!=null){
+                inputImageFragment.setParams(this);
                 transaction.replace(R.id.framelayout,inputImageFragment);
             }
             else{
                 inputImageFragment = new InputImageFragment();
+                inputImageFragment.setParams(this);
             }
             if(listFragment != null){
                 transaction.replace(R.id.framelayout,listFragment);
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements InputImageFragmen
         }
         else{
             inputImageFragment = new InputImageFragment();
+            inputImageFragment.setParams(this);
             listFragment = new ListFragment();
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.framelayout,inputImageFragment,"inputImageFragment");
@@ -47,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements InputImageFragmen
     }
 
     @Override
-    public void imageChoosen() {
+    public void imageChoosen(Bitmap b) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.framelayout,listFragment,"listFragment");
         transaction.commit();
