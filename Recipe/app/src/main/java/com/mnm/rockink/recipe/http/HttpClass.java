@@ -16,12 +16,6 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.BufferedSink;
 
-import static com.mnm.rockink.recipe.R.id.url;
-
-/**
- * Created by rockink on 1/21/17.
- */
-
 public class HttpClass {
 
     OkHttpClient client;
@@ -32,8 +26,8 @@ public class HttpClass {
     }
 
 
-    public Food get(String url) throws IOException {
-
+    public Food get(Bitmap urll) throws IOException {
+        String url;
         url = "https://samples.clarifai.com/food.jpg";
         url = String.format(Constants.URL+"getrecipe?url=%s", url);
         Request request = new Request.Builder()
@@ -50,7 +44,7 @@ public class HttpClass {
 
     }
 
-
+    /*
     public void get(Bitmap bitmap) throws IOException {
         String url = "https://samples.clarifai.com/food.jpg";
         url = String.format(Constants.URL+"getrecipe?url=%s", url);
@@ -85,7 +79,7 @@ public class HttpClass {
         return food;
 
     }
-    
+    */
 
 
     public OkHttpClient getClient() {

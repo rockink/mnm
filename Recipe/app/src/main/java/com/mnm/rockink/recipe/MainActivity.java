@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements InputImageFragmen
 
     @Override
     public void imageChoosen(Bitmap b) {
+        listFragment.setBitmap(b);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.framelayout,listFragment,"listFragment");
         transaction.commit();
