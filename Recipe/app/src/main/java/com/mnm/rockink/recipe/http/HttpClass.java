@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import com.google.gson.Gson;
 import com.mnm.rockink.recipe.jsonData.Food;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.PortUnreachableException;
 
@@ -51,29 +52,33 @@ public class HttpClass {
     }
 
 
-    public void get(Bitmap bitmap) throws IOException {
+    public Food get(final Bitmap bitmap) throws IOException {
         String url = "https://samples.clarifai.com/food.jpg";
-        url = String.format(Constants.URL+"getrecipe?url=%s", url);
+        url = String.format(Constants.URL+"getrecipe");
 
 
-        MediaType mediaType = MediaType.parse("png");
+        final MediaType mediaType = MediaType.parse("png");
 
         RequestBody requestBody = new RequestBody() {
             @Override
             public MediaType contentType() {
-                return ;
+                return mediaType;
             }
 
             @Override
             public void writeTo(BufferedSink sink) throws IOException {
 
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                sink.write(byteArray);
             }
-        }
+        };
 
 
         Request request = new Request.Builder()
                 .url(url)
-                .post()
+                .post(requestBody)
                 .get().build();
 
         Response response= client.newCall(request).execute();
