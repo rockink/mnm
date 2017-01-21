@@ -12,8 +12,8 @@ import com.mnm.rockink.recipe.jsonData.Food;
 
 public class MainActivity extends AppCompatActivity implements AppDescriptionFragment.OnFragmentInteractionListener, URLForm.OnFragmentInteractionListener , RecipeList.OnListFragmentInteractionListener {
 
-    AppDescriptionFragment appDescriptionFragment;
-    URLForm urlFormFragment;
+    private AppDescriptionFragment appDescriptionFragment;
+    private URLForm urlFormFragment;
     private RecipeList recipeList;
 
     @Override
@@ -38,18 +38,6 @@ public class MainActivity extends AppCompatActivity implements AppDescriptionFra
             transaction.add(R.id.main_layout, urlFormFragment, "form");
             transaction.commit();
         }
-
-
-
-    }
-
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-
 
     }
 

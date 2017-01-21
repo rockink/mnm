@@ -35,12 +35,7 @@ public class RecipeListActivity extends AppCompatActivity {
             transaction.commit();
         }
 
-
-
-
-
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

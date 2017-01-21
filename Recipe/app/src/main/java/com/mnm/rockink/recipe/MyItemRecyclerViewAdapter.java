@@ -37,11 +37,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-
         if(foodData == null) new GetItFromServer(httpClient, mListener).execute(urlString);
 
-
-            holder.mItem = foodData.getRecipes().get(position);
+        holder.mItem = foodData.getRecipes().get(position);
         final Recipe recipe = holder.mItem;
         holder.titleView.setText(recipe.getTitle());
         holder.recipeView.setText(recipe.getSourceUrl());
@@ -50,12 +48,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.recipeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 mListener.startBrowser(recipe.getSourceUrl());
-
             }
         });
-
 
         holder.nutritionalView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +58,6 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
                 mListener.startBrowser(recipe.getF2fUrl());
             }
         });
-
 
     }
 

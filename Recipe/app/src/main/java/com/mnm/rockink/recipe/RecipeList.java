@@ -16,12 +16,6 @@ import com.mnm.rockink.recipe.jsonData.Food;
 
 import java.util.List;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
 public class RecipeList extends Fragment {
 
 
@@ -32,12 +26,9 @@ public class RecipeList extends Fragment {
 
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -54,7 +45,6 @@ public class RecipeList extends Fragment {
         }
         return view;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -81,9 +71,7 @@ public class RecipeList extends Fragment {
 
     }
 
-
     public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onListFragmentInteraction(DummyItem item);
 
         void startBrowser(String url);

@@ -8,10 +8,6 @@ import com.mnm.rockink.recipe.jsonData.Food;
 
 import java.io.IOException;
 
-/**
- * Created by rockink on 1/21/17.
- */
-
 public class GetItFromServer extends AsyncTask<String, Object, Food> {
 
     private final URLForm.OnFragmentInteractionListener mListener;
