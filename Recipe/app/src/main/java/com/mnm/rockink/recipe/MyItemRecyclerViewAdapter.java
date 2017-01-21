@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.mnm.rockink.recipe.dummy.DummyContent.DummyItem;
 import com.mnm.rockink.recipe.jsonData.Food;
 import com.mnm.rockink.recipe.jsonData.Recipe;
 
