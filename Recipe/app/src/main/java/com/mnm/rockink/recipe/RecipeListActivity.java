@@ -31,16 +31,11 @@ public class RecipeListActivity extends AppCompatActivity {
 
             recipeList = new RecipeList();
             android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.main_layout, recipeList, "description");
+            transaction.add(R.id.framelayout, recipeList, "description");
             transaction.commit();
         }
 
-
-
-
-
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

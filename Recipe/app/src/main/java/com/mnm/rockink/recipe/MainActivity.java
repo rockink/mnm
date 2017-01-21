@@ -1,86 +1,55 @@
 package com.mnm.rockink.recipe;
 
-import android.content.Intent;
-import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.mnm.rockink.recipe.dummy.DummyContent;
-import com.mnm.rockink.recipe.jsonData.Food;
+public class MainActivity extends AppCompatActivity implements InputImageFragment.InputImageFragmentInteraction {
 
-public class MainActivity extends AppCompatActivity implements AppDescriptionFragment.OnFragmentInteractionListener, URLForm.OnFragmentInteractionListener , RecipeList.OnListFragmentInteractionListener {
-
-    AppDescriptionFragment appDescriptionFragment;
-    URLForm urlFormFragment;
-    private RecipeList recipeList;
+    private FragmentManager fragmentManager;
+    private InputImageFragment inputImageFragment;
+    private ListFragment listFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
+        fragmentManager = getSupportFragmentManager();
 
-        if(savedInstanceState != null){
-            appDescriptionFragment = (AppDescriptionFragment) getSupportFragmentManager().findFragmentByTag("description");
-            urlFormFragment = (URLForm) getSupportFragmentManager().findFragmentByTag("form");
-            recipeList = (RecipeList) getSupportFragmentManager().findFragmentByTag("recipeList");
-
-        }else {
-
-            appDescriptionFragment = new AppDescriptionFragment();
-            urlFormFragment = new URLForm();
-            recipeList = new RecipeList();
-
-            transaction.add(R.id.main_layout, appDescriptionFragment, "description");
-            transaction.add(R.id.main_layout, urlFormFragment, "form");
+        if(savedInstanceState!=null){
+            inputImageFragment = (InputImageFragment) fragmentManager.findFragmentByTag("inputImageFragment");
+            listFragment = (ListFragment) fragmentManager.findFragmentByTag("listFragment");
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if(inputImageFragment!=null){
+                transaction.replace(R.id.framelayout,inputImageFragment);
+            }
+            else{
+                inputImageFragment = new InputImageFragment();
+            }
+            if(listFragment != null){
+                transaction.replace(R.id.framelayout,listFragment);
+            }
+            else{
+                listFragment = new ListFragment();
+            }
+            transaction.commit();
+        }
+        else{
+            inputImageFragment = new InputImageFragment();
+            listFragment = new ListFragment();
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.framelayout,inputImageFragment,"inputImageFragment");
             transaction.commit();
         }
 
-
-
-    }
-
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-
-
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
-    public void setFoodList(Food s) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-//        recipeList = new RecipeList();
-        recipeList.setFoodData(s);
-
-        transaction.remove(appDescriptionFragment);
-        transaction.remove(urlFormFragment);
-        transaction.add(R.id.main_layout, recipeList, "recipeList");
+    public void imageChoosen() {
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.framelayout,listFragment,"listFragment");
         transaction.commit();
-
-    }
-
-    @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
-
-    }
-
-    @Override
-    public void startBrowser(String sourceUrl) {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(sourceUrl));
-        startActivity(i);
     }
 }

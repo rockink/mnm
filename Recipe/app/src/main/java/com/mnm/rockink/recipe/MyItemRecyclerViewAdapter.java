@@ -1,5 +1,7 @@
 package com.mnm.rockink.recipe;
 
+import android.view.LayoutInflater;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.mnm.rockink.recipe.GetItFromServer;
+import com.mnm.rockink.recipe.R;
+import com.mnm.rockink.recipe.RecipeList;
 import com.mnm.rockink.recipe.jsonData.Food;
 import com.mnm.rockink.recipe.jsonData.Recipe;
 
@@ -33,14 +38,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
 
-        if(foodData == null) new GetItFromServer(httpClient, mListener).execute(urlString);
+//        if (foodData == null) new GetItFromServer(httpClient, mListener).execute(urlString);
 
-
-            holder.mItem = foodData.getRecipes().get(position);
+        holder.mItem = foodData.getRecipes().get(position);
         final Recipe recipe = holder.mItem;
         holder.titleView.setText(recipe.getTitle());
         holder.recipeView.setText(recipe.getSourceUrl());
@@ -92,3 +97,4 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         }
     }
 }
+
