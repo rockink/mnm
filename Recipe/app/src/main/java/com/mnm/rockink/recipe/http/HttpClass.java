@@ -1,6 +1,7 @@
 package com.mnm.rockink.recipe.http;
 
 import android.graphics.Bitmap;
+import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.mnm.rockink.recipe.jsonData.Food;
@@ -53,8 +54,10 @@ public class HttpClass {
 
 
     public Food get(final Bitmap bitmap) throws IOException {
-        String url = "https://samples.clarifai.com/food.jpg";
-        url = String.format(Constants.URL+"getrecipe");
+
+        String url = String.format(Constants.URL+"getrecipe");
+
+
 
 
         final MediaType mediaType = MediaType.parse("png");
