@@ -7,12 +7,12 @@
 * Who did this
 
 ##What it does
-XX is a project that allows to the users take a picture of food or ingredients and then get recipes.
+XX is a project that allows users to take a picture of food, identify ingredients and then get recipes.
 
 ##How it works
-Firs the user takes a picture and send it to the background of the project. The first part of the background connects with Clarify to use its image recognizion and then get the name of the ingredients.
-Then the first part of the background send this list of ingredients to the second part of the background which connects to Food2Fork API and get recipes with the ingredients.
-Finally, this information is send to the Android app and showed to the user.
+First the user takes a picture and submit it to the background of the project. The first part of the background uses Clarifai API for its amazing image recognizion to identify the name of the ingredients and the food theme.
+Then the first part of the background sends this list of ingredients to the second part of the background which connects to Food2Fork API, returning relevant recipes with the above ingredients.
+Finally, this information is send to the Android app and shown to users.
 
 ##What tech is used
 For the first part of the backround we used Java.
