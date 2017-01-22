@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.mnm.rockink.recipe.http.HttpClass;
 import com.mnm.rockink.recipe.jsonData.Food;
 
@@ -35,7 +36,8 @@ public class GetItFromServer extends AsyncTask<Bitmap, Object, Food> {
 
     @Override
     protected void onPostExecute(Food s) {
-        Log.d(getClass().getCanonicalName() + " RECIPESS ", String.valueOf(s.getCount()));
+        Gson gson = new Gson();
+        Log.d(getClass().getCanonicalName() + " RECIPESS " , gson.toJson(s));
         mListener.setFoodList(s);
     }
 }

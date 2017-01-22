@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "base64-js": "^1.2.0",
     "clarifai": "^2.1.0-dev",
-    "hapi": "^16.1.0"
+    "hapi": "^16.1.0",
+    "superagent": "^3.3.2"
   }
 }

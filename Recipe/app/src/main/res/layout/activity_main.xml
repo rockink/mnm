@@ -14,41 +14,41 @@
         >
 
 
-    <com.usebutton.sdk.ButtonDropin
-        xmlns:button="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:id="@+id/main_dropin"
-        android:layout_height="60dp"
-        button:btn_buttonId="btn-78bb2b2df4f19870"
-        button:btn_backgroundColor="#4E595D"
-        button:btn_textColor="#fff"
-        button:btn_iconSize="15dp"
-        button:btn_font="Lobster-Regular.ttf"
-        />
+    <!--<com.usebutton.sdk.ButtonDropin-->
+        <!--xmlns:button="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/main_dropin"-->
+        <!--android:layout_height="60dp"-->
+        <!--button:btn_buttonId="btn-78bb2b2df4f19870"-->
+        <!--button:btn_backgroundColor="#4E595D"-->
+        <!--button:btn_textColor="#fff"-->
+        <!--button:btn_iconSize="15dp"-->
+        <!--button:btn_font="Lobster-Regular.ttf"-->
+        <!--/>-->
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Order Total $"
-                android:inputType="numberSigned"
-                android:id="@+id/main_amount"
-                />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+            <!--<EditText-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:hint="Order Total $"-->
+                <!--android:inputType="numberSigned"-->
+                <!--android:id="@+id/main_amount"-->
+                <!--/>-->
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/main_buy"
-                android:src="@drawable/common_full_open_on_phone"
-                />
+            <!--<ImageButton-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/main_buy"-->
+                <!--android:src="@drawable/common_full_open_on_phone"-->
+                <!--/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
 
 

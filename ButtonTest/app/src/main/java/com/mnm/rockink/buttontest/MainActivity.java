@@ -8,6 +8,8 @@ import com.usebutton.sdk.Button;
 import com.usebutton.sdk.ButtonContext;
 import com.usebutton.sdk.ButtonDropin;
 import com.usebutton.sdk.context.Identifiers;
+import com.usebutton.sdk.context.Location;
+import com.usebutton.sdk.util.LocationProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-
         if (Button.getButton().getApplicationId().startsWith("app-0000")) {
             Toast.makeText(this,
                     "You need to customize the app ID in your AndroidManifest and the button ID in your layout XML.",
@@ -26,23 +27,61 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        ButtonDropin dropin = (ButtonDropin) findViewById(R.id.main_dropin);
+        ButtonDropin dropin = (ButtonDropin) findViewById(R.id.my_button);
 
-        final com.usebutton.sdk.context.Location location = new com.usebutton.sdk.context.Location("Wok Wok");
+        com.usebutton.sdk.context.Location location = new com.usebutton.sdk.context.Location("Wok Wok");
         location.putIdentifier(Identifiers.IDENTIFIER_DELIVERY_HERO, "1118");
         final ButtonContext context = ButtonContext.withSubjectLocation(location);
+
+
 
         dropin.prepareForDisplay(context, new ButtonDropin.Listener() {
             @Override
             public void onPrepared(final boolean isReady) {
-
-                Toast.makeText(MainActivity.this, "Prepared to Listen " + isReady, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onClick(ButtonDropin buttonDropin) {
-                Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+
             }
+        });
+
+
+
+        //noinspection ResourceType
+        final android.location.Location bestLocation = new LocationProvider(this).getBestLocation();
+        if (bestLocation != null) {
+            context.setUserLocation(new Location(bestLocation));
+        }
+        else {
+            // Just to make sure we work on emulator etc, we'll use another place in NYC
+            // comment out to use your current location from above
+            context.setUserLocation(new Location(40.732561, -73.988068));
+        }
+
+        dropin = (ButtonDropin) findViewById(R.id.my_button);
+        location = new Location("New York");
+        location.putIdentifier(Identifiers.IDENTIFIER_DELIVERY_HERO, "1118");
+
+
+//        dropin.prepareForDisplay();
+
+
+        dropin.prepareForDisplay(context, new ButtonDropin.Listener() {
+            @Override
+            public void onPrepared(final boolean isReady) {
+                Toast.makeText(MainActivity.this,
+                        String.format("Button %s.", isReady ? "available" : "unavailable"),
+                        Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onClick(ButtonDropin buttonDropin) {
+
+            }
+
+
         });
 
     }

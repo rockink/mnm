@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.mnm.rockink.recipe.http.HttpClass;
 import com.mnm.rockink.recipe.jsonData.Food;
 import com.mnm.rockink.recipe.jsonData.Recipe;
 
@@ -20,6 +22,8 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
     private RecyclerView recyclerView;
     private RecipeRecyclerViewAdapter adapter;
     private Bitmap b;
+
+    static private HttpClass httpClient = new HttpClass();
 
     public ListFragment() {
 
@@ -34,11 +38,16 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_fragment_layout, container, false);
 
+
+        error("listfragment on creater");
+
         if(savedInstanceState!=null){
             recipes = savedInstanceState.getParcelable("food");
         }
         else{
-            //recipes = GetItFromServer bitmap b
+
+            error("getting from server");
+            new GetItFromServer(httpClient, null).execute(b);
         }
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
@@ -46,6 +55,10 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
         recyclerView.setAdapter(adapter);
 
         return v;
+    }
+
+    private void error(String s) {
+        Log.d(getClass().getCanonicalName(), s);
     }
 
     @Override
