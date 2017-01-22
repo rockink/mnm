@@ -18,12 +18,15 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.BufferedSink;
 
+<<<<<<< HEAD
 //import static com.mnm.rockink.recipe.R.id.url;
 
 /**
  * Created by rockink on 1/21/17.
  */
 
+=======
+>>>>>>> f85f350a9930c214c1c2f4f794dbdd9d06cf2ced
 public class HttpClass {
 
     OkHttpClient client;
@@ -34,8 +37,8 @@ public class HttpClass {
     }
 
 
-    public Food get(String url) throws IOException {
-
+    public Food get(Bitmap urll) throws IOException {
+        String url;
         url = "https://samples.clarifai.com/food.jpg";
         url = String.format(Constants.URL+"getrecipe?url=%s", url);
         Request request = new Request.Builder()
@@ -52,12 +55,19 @@ public class HttpClass {
 
     }
 
+    /*
+    public void get(Bitmap bitmap) throws IOException {
 
+<<<<<<< HEAD
     public Food get(final Bitmap bitmap) throws IOException {
 
         String url = String.format(Constants.URL+"getrecipe");
 
 
+=======
+        String url = "https://samples.clarifai.com/food.jpg";
+        url = String.format(Constants.URL+"getrecipe");
+>>>>>>> f85f350a9930c214c1c2f4f794dbdd9d06cf2ced
 
 
         final MediaType mediaType = MediaType.parse("png");
@@ -93,7 +103,7 @@ public class HttpClass {
         return food;
 
     }
-    
+    */
 
 
     public OkHttpClient getClient() {
