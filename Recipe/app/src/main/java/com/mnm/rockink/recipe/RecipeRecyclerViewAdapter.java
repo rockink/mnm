@@ -1,5 +1,6 @@
 package com.mnm.rockink.recipe;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,7 @@ import com.mnm.rockink.recipe.jsonData.Recipe;
 
 public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecyclerViewAdapter.ViewHolder> {
 
-    private final Food foodData;
+    private Food foodData;
 
     public RecipeRecyclerViewAdapter(Food foodData) {
         this.foodData = foodData;
@@ -31,8 +32,7 @@ public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecycl
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-
-//        if (foodData == null) new GetItFromServer(httpClient, mListener).execute(urlString);
+        error("onbind view called ");
 
         holder.mItem = foodData.getRecipes().get(position);
         final Recipe recipe = holder.mItem;
@@ -64,7 +64,21 @@ public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecycl
 
     @Override
     public int getItemCount() {
+
+//        error("count is " + foodData.getCount());
+        if(foodData == null) return 0;
         return foodData.getCount();
+    }
+
+    public void setFoodList(Food s) {
+        this.foodData = s;
+        error("data is changed ");
+        error("count " + s.getCount());
+        notifyDataSetChanged();
+    }
+
+    private void error(String s) {
+        Log.d(getClass().getCanonicalName(), s);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

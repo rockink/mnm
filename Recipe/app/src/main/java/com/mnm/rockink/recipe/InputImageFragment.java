@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class InputImageFragment extends Fragment {
     private Button other_image;
     private InputImageFragmentInteraction myListener;
     private Bitmap bitmap;
+    private TextView info;
 
     public interface InputImageFragmentInteraction{
         void imageChoosen(Bitmap b);
@@ -53,6 +55,7 @@ public class InputImageFragment extends Fragment {
         imageView = (ImageView) v.findViewById(R.id.imageView);
         this_image = (Button) v.findViewById(R.id.this_image);
         other_image = (Button) v.findViewById(R.id.other_image);
+        info =(TextView)v.findViewById(R.id.info);
 
         this_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +90,10 @@ public class InputImageFragment extends Fragment {
             imageView.setImageBitmap(bitmap);
         }
 
+        if(imageView.getDrawable() != null){
+            info.setVisibility(View.GONE);
+        }
+
         return v;
     }
 
@@ -103,6 +110,7 @@ public class InputImageFragment extends Fragment {
                 //Get image
                 bitmap = extras.getParcelable("data");
                 imageView.setImageBitmap(bitmap);
+                info.setVisibility(View.GONE);
             }
             else{
                 InputStream inputStream = null;
@@ -110,6 +118,7 @@ public class InputImageFragment extends Fragment {
                     inputStream = getActivity().getContentResolver().openInputStream(data.getData());
                     bitmap = BitmapFactory.decodeStream(inputStream);
                     imageView.setImageBitmap(bitmap);
+                    info.setVisibility(View.GONE);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }

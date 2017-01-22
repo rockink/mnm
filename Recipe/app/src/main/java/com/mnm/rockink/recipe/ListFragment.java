@@ -4,6 +4,7 @@ package com.mnm.rockink.recipe;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
     private RecyclerView recyclerView;
     private RecipeRecyclerViewAdapter adapter;
     private Bitmap b;
+    private RecyclerView.LayoutManager manager;
 
     static private HttpClass httpClient = new HttpClass();
 
@@ -29,15 +31,16 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
 
     }
 
+
     public void setBitmap(Bitmap b){
         this.b = b;
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.list_fragment_layout, container, false);
-
 
         error("listfragment on creater");
 
@@ -47,12 +50,15 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
         else{
 
             error("getting from server");
-            new GetItFromServer(httpClient, null).execute(b);
+            new GetItFromServer(httpClient, this).execute(b);
         }
 
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerview);
         adapter = new RecipeRecyclerViewAdapter(recipes);
         recyclerView.setAdapter(adapter);
+        manager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(manager);
+
 
         return v;
     }
@@ -64,8 +70,12 @@ public class ListFragment extends Fragment implements GetItFromServer.GetItemFro
     @Override
     public void setFoodList(Food s) {
         recipes = s;
-        adapter = new RecipeRecyclerViewAdapter(recipes);
-        recyclerView.setAdapter(adapter);
+        adapter.setFoodList(s);
+        adapter.notifyDataSetChanged();
+
+//        adapter = new RecipeRecyclerViewAdapter(recipes);
+//        recyclerView.setAdapter(adapter);
+
     }
 
     @Override
