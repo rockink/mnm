@@ -10,7 +10,7 @@ var Clarifai = require('clarifai');
 
 server.connection({
     host: 'localhost',
-    port: 8002
+    port: 8010
 });
 
 
@@ -30,30 +30,32 @@ server.route({
     }
 });
 
+// server.route({
+//     method: 'GET',
+//     path:'/getrecipe',
+//     handler: function (request, reply) {
+//
+//       app.models.predict(Clarifai.FOOD_MODEL, "https://samples.clarifai.com/food.jpg").then(
+//           function(response) {
+//             // do something with response
+//             return reply(response);
+//           },
+//           function(err) {
+//             // there was an error
+//           }
+//         );
+//
+//     }
+// });
+
 server.route({
     method: 'GET',
-    path:'/test',
+    path:'/getrecipe',
     handler: function (request, reply) {
 
-      app.models.predict(Clarifai.FOOD_MODEL, "https://samples.clarifai.com/food.jpg").then(
-          function(response) {
-            // do something with response
-            return reply(response);
-          },
-          function(err) {
-            // there was an error
-          }
-        );
+        console.log(req);
 
-    }
-});
-
-server.route({
-    method: 'POST',
-    path:'/test',
-    handler: function (request, reply) {
-
-      app.models.predict(Clarifai.GENERAL_MODEL, {base64: request.payload.data}).then(
+      app.models.predict(Clarifai.GENERAL_MODEL, {base64: request.query.base64}).then(
          function(response) {
            // do something with response
            reply(response);

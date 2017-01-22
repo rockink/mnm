@@ -2,31 +2,21 @@ package com.mnm.rockink.recipe;
 
 import android.view.LayoutInflater;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.mnm.rockink.recipe.GetItFromServer;
-import com.mnm.rockink.recipe.R;
-import com.mnm.rockink.recipe.RecipeList;
 import com.mnm.rockink.recipe.jsonData.Food;
 import com.mnm.rockink.recipe.jsonData.Recipe;
 
-import java.util.List;
 
+public class RecipeRecyclerViewAdapter extends RecyclerView.Adapter<RecipeRecyclerViewAdapter.ViewHolder> {
 
-public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
-
-    private final RecipeList.OnListFragmentInteractionListener mListener;
     private final Food foodData;
 
-    public MyItemRecyclerViewAdapter(Food foodData, RecipeList.OnListFragmentInteractionListener mListener) {
-        this.mListener = mListener;
+    public RecipeRecyclerViewAdapter(Food foodData) {
         this.foodData = foodData;
 
     }
@@ -34,10 +24,9 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_item, parent, false);
+                .inflate(R.layout.recipe_item, parent, false);
         return new ViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
@@ -55,7 +44,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             @Override
             public void onClick(View v) {
 
-                mListener.startBrowser(recipe.getSourceUrl());
+                //mListener.startBrowser(recipe.getSourceUrl());
+                //intent to explorer
 
             }
         });
@@ -64,7 +54,8 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.nutritionalView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.startBrowser(recipe.getF2fUrl());
+                //mListener.startBrowser(recipe.getF2fUrl());
+                //intent to explorer
             }
         });
 

@@ -1,11 +1,14 @@
 
 package com.mnm.rockink.recipe.jsonData;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Food {
+public class Food implements Parcelable {
 
     @SerializedName("count")
     @Expose
@@ -31,4 +34,13 @@ public class Food {
         this.recipes = recipes;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
 }

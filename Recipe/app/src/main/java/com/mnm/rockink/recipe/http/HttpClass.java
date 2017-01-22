@@ -18,7 +18,7 @@ import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.BufferedSink;
 
-import static com.mnm.rockink.recipe.R.id.url;
+//import static com.mnm.rockink.recipe.R.id.url;
 
 /**
  * Created by rockink on 1/21/17.

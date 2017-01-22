@@ -26,7 +26,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.1.0'
 
-    compile 'com.usebutton:android-sdk:4.1.3'
+    compile 'com.usebutton:android-sdk:5.6.0'
     // Required for cross-app attribution, any version of the Google Play Services will work.
     compile 'com.google.android.gms:play-services-ads:10.0.1'
 

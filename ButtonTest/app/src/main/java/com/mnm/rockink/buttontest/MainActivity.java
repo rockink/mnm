@@ -35,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         dropin.prepareForDisplay(context, new ButtonDropin.Listener() {
             @Override
             public void onPrepared(final boolean isReady) {
+
+                Toast.makeText(MainActivity.this, "Prepared to Listen " + isReady, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onClick(ButtonDropin buttonDropin) {
+                Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
