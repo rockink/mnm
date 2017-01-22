@@ -13,7 +13,7 @@ var base64 = require('base64-js');
 
 server.connection({
     host: 'localhost',
-    port: 8010
+    port: 8011
 });
 
 
@@ -94,7 +94,8 @@ var request = require('superagent');
 var getRecipe = function(list, reply){
 
   var query = "";
-  for(var i = 0; i < list.length; i++){
+  var length = list.length > 5 ? 5 : list.length;
+  for(var i = 0; i < length; i++){
     query  = query + "," + list[i];
   }
 
@@ -146,17 +147,23 @@ server.route({
         //THIS IS THE ONE THAT WE ARE GOING TO USE!
 
 
-        var fakeData = {
-          "count": 13,
-          "recipes":
-          [
-            {
-              "publisher":
-              "All Recipes",
-              "f2f_url": "http://food2fork.com/view/32219", "title": "Terrific Turkey Chili", "source_url": "http://allrecipes.com/Recipe/Terrific-Turkey-Chili/Detail.aspx", "recipe_id": "32219", "image_url": "http://static.food2fork.com/121406cb64.jpg", "social_rank": 99.9999979241772, "publisher_url": "http://allrecipes.com"}, {"publisher": "Epicurious", "f2f_url": "http://food2fork.com/view/f00677", "title": "Zucchini and Corn Tacos", "source_url": "http://www.epicurious.com/recipes/food/views/Zucchini-and-Corn-Tacos-354249", "recipe_id": "f00677", "image_url": "http://static.food2fork.com/354249ce8a.jpg", "social_rank": 94.67769382505922, "publisher_url": "http://www.epicurious.com"}, {"publisher": "Bon Appetit", "f2f_url": "http://food2fork.com/view/50866", "title": "Chile-Corn Custard Squares", "source_url": "http://www.bonappetit.com/recipes/2009/06/chile_corn_custard_squares", "recipe_id": "50866", "image_url": "http://static.food2fork.com/mare_chile_corn_custard_squares_h2875.jpg", "social_rank": 80.68285909795597, "publisher_url": "http://www.bonappetit.com"}, {"publisher": "Epicurious", "f2f_url": "http://food2fork.com/view/82e1d4", "title": "Poblano and Mushroom Tacos", "source_url": "http://www.epicurious.com/recipes/food/views/Poblano-and-Mushroom-Tacos-355771", "recipe_id": "82e1d4", "image_url": "http://static.food2fork.com/355771787f.jpg", "social_rank": 68.83505220772952, "publisher_url": "http://www.epicurious.com"}, {"publisher": "Serious Eats", "f2f_url": "http://food2fork.com/view/31cc43", "title": "Dinner Tonight: Healthy and Delicious Braised Greens Tacos", "source_url": "http://www.seriouseats.com/recipes/2008/02/dinner-tonight-braised-greens-tacos.html", "recipe_id": "31cc43", "image_url": "http://static.food2fork.com/20080212dinnertonightgreentacose0a8.jpg", "social_rank": 59.04395893403631, "publisher_url": "http://www.seriouseats.com/"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/32824", "title": "Tofu Tacos I", "source_url": "http://allrecipes.com/Recipe/Tofu-Tacos-I/Detail.aspx", "recipe_id": "32824", "image_url": "http://static.food2fork.com/1507723181.jpg", "social_rank": 50.519601929460855, "publisher_url": "http://allrecipes.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/18026", "title": "Jollyrogers' Chilaquiles", "source_url": "http://allrecipes.com/Recipe/Jollyrogers-Chilaquiles/Detail.aspx", "recipe_id": "18026", "image_url": "http://static.food2fork.com/17676440c0.jpg", "social_rank": 46.95571929015768, "publisher_url": "http://allrecipes.com"}, {"publisher": "Epicurious", "f2f_url": "http://food2fork.com/view/6ede49", "title": "Chile-Corn Custard Squares", "source_url": "http://www.epicurious.com/recipes/food/views/Chile-Corn-Custard-Squares-353419", "recipe_id": "6ede49", "image_url": "http://static.food2fork.com/epicuriousfacebook511b.png", "social_rank": 40.376436045748875, "publisher_url": "http://www.epicurious.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/5fd95e", "title": "Vegetarian Black Bean Enchiladas", "source_url": "http://allrecipes.com/Recipe/Vegetarian-Black-Bean-Enchiladas/Detail.aspx", "recipe_id": "5fd95e", "image_url": "http://static.food2fork.com/10051870820.jpg", "social_rank": 39.0058682084061, "publisher_url": "http://allrecipes.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/8b6a37", "title": "Cinco de Mayo Casserole", "source_url": "http://allrecipes.com/Recipe/Cinco-De-Mayo-Casserole/Detail.aspx", "recipe_id": "8b6a37", "image_url": "http://static.food2fork.com/100498334dc.jpg", "social_rank": 36.53277389525525, "publisher_url": "http://allrecipes.com"}, {"publisher": "Bon Appetit", "f2f_url": "http://food2fork.com/view/50577", "title": "Poblano and Mushroom Tacos", "source_url": "http://www.bonappetit.com/recipes/quick-recipes/2009/11/poblano_and_mushroom_tacos", "recipe_id": "50577", "image_url": "http://static.food2fork.com/mare_poblano_and_mushroom_tacos_ve546.jpg", "social_rank": 35.565927843371426, "publisher_url": "http://www.bonappetit.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/2315", "title": "Bacon, Avocado and Cheese Omelet", "source_url": "http://allrecipes.com/Recipe/Bacon-Avocado-And-Cheese-Omelet/Detail.aspx", "recipe_id": "2315", "image_url": "http://static.food2fork.com/98591627d3.jpg", "social_rank": 35.18691939406289, "publisher_url": "http://allrecipes.com"}, {"publisher": "Cookstr", "f2f_url": "http://food2fork.com/view/45280", "title": "Beef and Bean Burritos", "source_url": "http://www.cookstr.com/recipes/beef-and-bean-burritos", "recipe_id": "45280", "image_url": "http://static.food2fork.com/recipe22592c91f.jpg", "social_rank": 34.80777735743579, "publisher_url": "http://www.cookstr.com"}]};
-
-          
-        return reply(fakeData);
+        // var fakeData = {
+        //   "count": 13,
+        //   "recipes":
+        //   [
+        //     {
+        //       "publisher":
+        //       "All Recipes",
+        //       "f2f_url": "http://food2fork.com/view/32219",
+        //       "title": "Terrific Turkey Chili",
+        //       "source_url": "http://allrecipes.com/Recipe/Terrific-Turkey-Chili/Detail.aspx",
+        //       "recipe_id": "32219",
+        //       "image_url": "http://static.food2fork.com/121406cb64.jpg",
+        //       "social_rank": 99.9999979241772, "publisher_url": "http://allrecipes.com"},
+        //       {"publisher": "Epicurious", "f2f_url": "http://food2fork.com/view/f00677", "title": "Zucchini and Corn Tacos", "source_url": "http://www.epicurious.com/recipes/food/views/Zucchini-and-Corn-Tacos-354249", "recipe_id": "f00677", "image_url": "http://static.food2fork.com/354249ce8a.jpg", "social_rank": 94.67769382505922, "publisher_url": "http://www.epicurious.com"}, {"publisher": "Bon Appetit", "f2f_url": "http://food2fork.com/view/50866", "title": "Chile-Corn Custard Squares", "source_url": "http://www.bonappetit.com/recipes/2009/06/chile_corn_custard_squares", "recipe_id": "50866", "image_url": "http://static.food2fork.com/mare_chile_corn_custard_squares_h2875.jpg", "social_rank": 80.68285909795597, "publisher_url": "http://www.bonappetit.com"}, {"publisher": "Epicurious", "f2f_url": "http://food2fork.com/view/82e1d4", "title": "Poblano and Mushroom Tacos", "source_url": "http://www.epicurious.com/recipes/food/views/Poblano-and-Mushroom-Tacos-355771", "recipe_id": "82e1d4", "image_url": "http://static.food2fork.com/355771787f.jpg", "social_rank": 68.83505220772952, "publisher_url": "http://www.epicurious.com"}, {"publisher": "Serious Eats", "f2f_url": "http://food2fork.com/view/31cc43", "title": "Dinner Tonight: Healthy and Delicious Braised Greens Tacos", "source_url": "http://www.seriouseats.com/recipes/2008/02/dinner-tonight-braised-greens-tacos.html", "recipe_id": "31cc43", "image_url": "http://static.food2fork.com/20080212dinnertonightgreentacose0a8.jpg", "social_rank": 59.04395893403631, "publisher_url": "http://www.seriouseats.com/"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/32824", "title": "Tofu Tacos I", "source_url": "http://allrecipes.com/Recipe/Tofu-Tacos-I/Detail.aspx", "recipe_id": "32824", "image_url": "http://static.food2fork.com/1507723181.jpg", "social_rank": 50.519601929460855, "publisher_url": "http://allrecipes.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/18026", "title": "Jollyrogers' Chilaquiles", "source_url": "http://allrecipes.com/Recipe/Jollyrogers-Chilaquiles/Detail.aspx", "recipe_id": "18026", "image_url": "http://static.food2fork.com/17676440c0.jpg", "social_rank": 46.95571929015768, "publisher_url": "http://allrecipes.com"}, {"publisher": "Epicurious", "f2f_url": "http://food2fork.com/view/6ede49", "title": "Chile-Corn Custard Squares", "source_url": "http://www.epicurious.com/recipes/food/views/Chile-Corn-Custard-Squares-353419", "recipe_id": "6ede49", "image_url": "http://static.food2fork.com/epicuriousfacebook511b.png", "social_rank": 40.376436045748875, "publisher_url": "http://www.epicurious.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/5fd95e", "title": "Vegetarian Black Bean Enchiladas", "source_url": "http://allrecipes.com/Recipe/Vegetarian-Black-Bean-Enchiladas/Detail.aspx", "recipe_id": "5fd95e", "image_url": "http://static.food2fork.com/10051870820.jpg", "social_rank": 39.0058682084061, "publisher_url": "http://allrecipes.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/8b6a37", "title": "Cinco de Mayo Casserole", "source_url": "http://allrecipes.com/Recipe/Cinco-De-Mayo-Casserole/Detail.aspx", "recipe_id": "8b6a37", "image_url": "http://static.food2fork.com/100498334dc.jpg", "social_rank": 36.53277389525525, "publisher_url": "http://allrecipes.com"}, {"publisher": "Bon Appetit", "f2f_url": "http://food2fork.com/view/50577", "title": "Poblano and Mushroom Tacos", "source_url": "http://www.bonappetit.com/recipes/quick-recipes/2009/11/poblano_and_mushroom_tacos", "recipe_id": "50577", "image_url": "http://static.food2fork.com/mare_poblano_and_mushroom_tacos_ve546.jpg", "social_rank": 35.565927843371426, "publisher_url": "http://www.bonappetit.com"}, {"publisher": "All Recipes", "f2f_url": "http://food2fork.com/view/2315", "title": "Bacon, Avocado and Cheese Omelet", "source_url": "http://allrecipes.com/Recipe/Bacon-Avocado-And-Cheese-Omelet/Detail.aspx", "recipe_id": "2315", "image_url": "http://static.food2fork.com/98591627d3.jpg", "social_rank": 35.18691939406289, "publisher_url": "http://allrecipes.com"}, {"publisher": "Cookstr", "f2f_url": "http://food2fork.com/view/45280", "title": "Beef and Bean Burritos", "source_url": "http://www.cookstr.com/recipes/beef-and-bean-burritos", "recipe_id": "45280", "image_url": "http://static.food2fork.com/recipe22592c91f.jpg", "social_rank": 34.80777735743579, "publisher_url": "http://www.cookstr.com"}]};
+        //
+        //
+        // return reply(fakeData);
 
 
 
