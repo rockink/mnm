@@ -6,8 +6,6 @@ const Hapi = require('hapi');
 const server = new Hapi.Server();
 
 var Clarifai = require('clarifai');
-
-
 var base64 = require('base64-js');
 
 
@@ -108,9 +106,10 @@ var getRecipe = function(list, reply){
           else {
 
             console.error("something is wrong data is not coming ");
-            console.log(res);
+            console.log(res.text);
 
-            return reply(res.data);
+
+            return reply(res.text);
 
           }
 
